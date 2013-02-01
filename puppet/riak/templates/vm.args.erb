@@ -16,6 +16,9 @@
 ## Treat error_logger warnings as warnings
 +W w
 
+## SMP Enablement required for ERL VM on single core machines
+-smp enable +S 1
+
 ## Increase number of concurrent ports/sockets
 -env ERL_MAX_PORTS 4096
 
