@@ -1,19 +1,19 @@
 # Puppet class for riak
 
 class riak {
+  package { "expect":
+    ensure => present,
+    }
+
   exec { "install_riak":
     command => "/vagrant/files/scripts/install_riak",
     path => "/bin:/usr/bin",
-  }
-
-  exec { "install_riaknostic":
-    command => "/vagrant/files/scripts/install_riaknostic",
-    path => "/bin:/usr/bin",
+    require => Package["expect"],
   }
 
   package { "riak":
     ensure => present,
-    require => [ Exec["install_riak"], Exec["install_riaknostic"] ],
+    require => [ Exec["install_riak"] ],
   }
 
   file { "app.config":
