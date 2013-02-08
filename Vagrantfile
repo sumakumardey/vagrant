@@ -6,15 +6,15 @@
 
 # Select the number of riak nodes in the cluster.
 
-num_nodes = 5
+num_nodes = 3
 
 # Select the name of the box you prefer.
 #
-# This will only work with CentOS 6 base boxes, but if the name
-# you used when you added the box is different from 'centos6' 
+# This will only work with Ubuntu Precise (12.04 AMD 64) base boxes, but if the name
+# you used when you added the box is different from 'ubuntu' 
 # then change this value.
 
-base_box = "centos6"
+base_box = "ubuntu"
 
 # Base IP value.
 #
@@ -53,7 +53,7 @@ Vagrant::Config.run do |cluster|
       :facter => {
         "ip_addr"      => ip_addr,
         "join_ip"      => "#{base_ip}#{ip_inc}",
-	"riak_backend" => riak_backend,
+	      "riak_backend" => riak_backend,
       }
     }
 
@@ -65,8 +65,10 @@ Vagrant::Config.run do |cluster|
       node.vm.network   :hostonly, ip_addr
       node.vm.provision :puppet, prov_args do |puppet|
         puppet.manifests_path = "puppet"
-	puppet.module_path    = "puppet"
+	      puppet.module_path    = "puppet"
         puppet.manifest_file  = "init.pp"
+        # Uncomment for verbose debugging output
+        puppet.options = "--verbose --debug"
       end
     end
   end
