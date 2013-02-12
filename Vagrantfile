@@ -6,7 +6,7 @@
 
 # Select the number of riak nodes in the cluster.
 
-num_nodes = 3
+num_nodes = 5
 
 # Select the name of the box you prefer.
 #
