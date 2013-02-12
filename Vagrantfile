@@ -68,7 +68,7 @@ Vagrant::Config.run do |cluster|
 	      puppet.module_path    = "puppet"
         puppet.manifest_file  = "init.pp"
         # Uncomment for verbose debugging output
-        puppet.options = "--verbose --debug"
+        # puppet.options = "--verbose --debug"
       end
     end
   end
