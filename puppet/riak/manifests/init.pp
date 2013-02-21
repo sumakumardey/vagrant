@@ -4,7 +4,7 @@ class riak {
  package { "riak":
     provider => dpkg,
     ensure => installed,
-    source => "/vagrant/files/riak_1.3.0rc2-1_amd64.deb",
+    source => "/vagrant/files/riak_1.3.0-1_amd64.deb",
   }
 
   file { "app.config":
