@@ -1,19 +1,21 @@
 vagrant-riak-cluster
 ====================
 
-Vagrant setup for creating a centos6 riak cluster. This vagrant
+**NOTE: This README needs updated to reflect current work**
+
+Vagrant setup for creating a Ubuntu riak cluster. This vagrant
 will let you create a riak cluster of N nodes that will automatically
 be joined together.
 
-For this to work you'll need a CentOS 6 base box added
-to your Vagrant install with the name `centos6`, i.e.:
+For this to work you'll need an Ubuntu base box added
+to your Vagrant install with the name `ubuntu`, i.e.:
 
     $ vagrant box list
-    centos6
+    ubuntu
     lucid32
     ...
 
-You can grab pre-existing CentOS 6 base boxes of the internet, or roll
+You can grab pre-existing Ubuntu base boxes of the internet, or roll
 your own using [veewee](https://github.com/jedi4ever/veewee/).
 
 Make sure to grab one with Puppet installed, or install it yourself and then do a vagrant reload.
