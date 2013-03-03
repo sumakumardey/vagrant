@@ -5,6 +5,8 @@
 #--- BEGIN config vars ---#
 
 # Select the number of riak nodes in the cluster.
+# There is a reason to use 5 (in production) that is explained in detail on the
+# Basho blog.
 
 num_nodes = 5
 
@@ -18,7 +20,7 @@ base_box = "ubuntu"
 
 # Base IP value.
 #
-# Change it if you need.
+# Modify if desired.
 
 base_ip = "33.33.33."
 
@@ -68,6 +70,7 @@ Vagrant::Config.run do |cluster|
 	      puppet.module_path    = "puppet"
         puppet.manifest_file  = "init.pp"
         # Uncomment for verbose debugging output
+        # quite helpful if something goes awry
         ## puppet.options = "--verbose --debug"
       end
     end
