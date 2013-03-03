@@ -1,19 +1,10 @@
 # Puppet class for riak
 
 class riak {
-  exec { "install_riak":
-    command => "/vagrant/files/scripts/install_riak",
-    path => "/bin:/usr/bin",
-  }
-
-  exec { "install_riaknostic":
-    command => "/vagrant/files/scripts/install_riaknostic",
-    path => "/bin:/usr/bin",
-  }
-
-  package { "riak":
-    ensure => present,
-    require => [ Exec["install_riak"], Exec["install_riaknostic"] ],
+ package { "riak":
+    provider => dpkg,
+    ensure => installed,
+    source => "/vagrant/files/riak_1.3.0-1_amd64.deb",
   }
 
   file { "app.config":
@@ -55,7 +46,7 @@ class riak {
     ensure => running,
     require => [
       Exec["flush_iptables"], Package["riak"],
-      File["app.config"], File["vm.args"]
+      File["app.config"], File["vm.args"],
     ],
   }
 

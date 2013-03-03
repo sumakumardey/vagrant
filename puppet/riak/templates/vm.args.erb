@@ -16,6 +16,9 @@
 ## Treat error_logger warnings as warnings
 +W w
 
+## Force the erlang VM to use SMP
+-smp enable
+
 ## Increase number of concurrent ports/sockets
 -env ERL_MAX_PORTS 4096
 
@@ -24,6 +27,9 @@
 
 ## Set the location of crash dumps
 -env ERL_CRASH_DUMP /var/log/riak/erl_crash.dump
+
+## Raise the ETS table limit
+-env ERL_MAX_ETS_TABLES 8192
 
 ## Begin SSL distribution items, DO NOT DELETE OR EDIT THIS COMMENT
 
