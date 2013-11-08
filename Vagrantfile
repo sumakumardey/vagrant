@@ -1,6 +1,5 @@
-#!/usr/bin/env ruby
-# vim: set ft=ruby :
-# vim: set syntax=ruby :
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
 #--- BEGIN config vars ---#
 
@@ -44,7 +43,7 @@ ip_inc = 10
 
 #--- END config vars ---#
 
-Vagrant::Config.run do |cluster|
+Vagrant.configure("2") do |cluster|
 
   (1..num_nodes).each do |index|
 
@@ -54,24 +53,28 @@ Vagrant::Config.run do |cluster|
     prov_args = {
       :facter => {
         "ip_addr"      => ip_addr,
+        "riak_backend" => riak_backend,
         "join_ip"      => "#{base_ip}#{ip_inc}",
-	      "riak_backend" => riak_backend,
       }
     }
 
     cluster.vm.define hostname do |node|
-      node.vm.box       = base_box
-      node.vm.host_name = hostname
-      node.vm.boot_mode = :headless
 
-      node.vm.network   :hostonly, ip_addr
+      node.ssh.forward_agent = true
+      node.vm.host_name      = hostname
+      node.vm.box            = "precise64"
+      node.vm.box_url        = "http://files.vagrantup.com/precise64.box"
+
+      node.vm.network "private_network", ip: ip_addr
+      node.vm.provider :virtualbox do |vb|  #
+        vb.customize ["modifyvm", :id, "--memory", "512"]
+      end
+
       node.vm.provision :puppet, prov_args do |puppet|
         puppet.manifests_path = "puppet"
-	      puppet.module_path    = "puppet"
+        puppet.module_path    = "puppet"
         puppet.manifest_file  = "init.pp"
-        # Uncomment for verbose debugging output
-        # quite helpful if something goes awry
-        ## puppet.options = "--verbose --debug"
+        # puppet.options = "--verbose --debug"
       end
     end
   end
