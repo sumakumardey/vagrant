@@ -293,6 +293,16 @@
          {sasl_error_logger, false}
         ]},
 
+  {default_bucket_props, [
+        {n_val,"<%= n_val %>"},
+        {allow_mult,false},
+        {last_write_wins,false},
+        {precommit, []},
+        {postcommit, []},
+        {chash_keyfun, {riak_core_util, chash_std_keyfun}},
+        {linkfun, {modfun, riak_kv_wm_link_walker, mapreduce_linkfun}}
+    ]},
+
  %% riak_control config
  {riak_control, [
                 %% Set to false to disable the admin panel.

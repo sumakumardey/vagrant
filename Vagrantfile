@@ -7,7 +7,7 @@
 # There is a reason to use 5 (in production) that is explained in detail on the
 # Basho blog.
 
-num_nodes = 5
+num_nodes = 1
 
 # Select the name of the box you prefer.
 #
@@ -21,7 +21,7 @@ base_box = "ubuntu"
 #
 # Modify if desired.
 
-base_ip = "33.33.33."
+base_ip = "31.33.33."
 
 # Select the storage backend you want for Riak.
 # To take advantage of 2i we must use eLevelDB.
@@ -34,7 +34,7 @@ base_ip = "33.33.33."
 #   memory
 #   multi
 
-riak_backend = "eleveldb"
+riak_backend = "bitcask"
 
 # IP addresses can't start at one (i.e X.X.X.1) or complaints will
 # come your way. This is the IP increment for the ip4 value.
@@ -55,6 +55,7 @@ Vagrant.configure("2") do |cluster|
         "ip_addr"      => ip_addr,
         "riak_backend" => riak_backend,
         "join_ip"      => "#{base_ip}#{ip_inc}",
+        "n_val"        => 1
       }
     }
 
